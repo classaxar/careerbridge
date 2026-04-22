@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CareerBridge – Project Documentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --green: #16a34a;
+    --blue: #2563eb;
+    --purple: #7c3aed;
+    --amber: #d97706;
+    --red: #dc2626;
+    --dark: #0f172a;
+    --mid: #1e293b;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --card: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(22,163,74,0.2);
+    border: 1px solid rgba(22,163,74,0.4);
+    color: #4ade80;
+    padding: 6px 18px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .cover h1 {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .cover h1 span { color: #4ade80; }
+  .cover-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .cover-meta {
+    position: relative;
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .cover-meta-item {
+    text-align: center;
+  }
+  .cover-meta-item .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+  }
+  .cover-meta-item .value {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+  .cover-chips {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .chip {
+    padding: 5px 14px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  .chip-green { background: rgba(22,163,74,0.15); color:#4ade80; border-color:rgba(22,163,74,0.3); }
+  .chip-blue  { background: rgba(37,99,235,0.15);  color:#60a5fa; border-color:rgba(37,99,235,0.3); }
+  .chip-purple{ background: rgba(124,58,237,0.15); color:#a78bfa; border-color:rgba(124,58,237,0.3); }
+  .chip-amber { background: rgba(217,119,6,0.15);  color:#fbbf24; border-color:rgba(217,119,6,0.3); }
+
+  /* ── CONTENT ── */
+  .content { max-width: 900px; margin: 0 auto; padding: 48px 40px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 40px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    width: 32px; height: 32px;
+    background: var(--dark);
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark);
+  }
+
+  /* ── PAGE CARD ── */
+  .page-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .page-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--dark);
+    color: white;
+  }
+  .page-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .page-card-header h3 { font-size: 15px; font-weight: 700; }
+  .page-card-header p  { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .page-card-body { padding: 20px; }
+
+  /* ── FEATURE ROW ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 12.5px;
+  }
+  .feature-item .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .dot-green  { background: var(--green); }
+  .dot-blue   { background: var(--blue); }
+  .dot-purple { background: var(--purple); }
+  .dot-amber  { background: var(--amber); }
+
+  /* ── TECH TABLE ── */
+  .tech-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
+  }
+  .tech-row:last-child { border-bottom: none; }
+  .tech-label {
+    min-width: 180px;
+    font-weight: 600;
+    color: var(--dark);
+    flex-shrink: 0;
+  }
+  .tech-desc { color: var(--muted); flex: 1; }
+  .tech-badge {
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-g { background:#dcfce7; color:#16a34a; }
+  .badge-b { background:#dbeafe; color:#2563eb; }
+  .badge-p { background:#ede9fe; color:#7c3aed; }
+  .badge-a { background:#fef3c7; color:#d97706; }
+  .badge-r { background:#fee2e2; color:#dc2626; }
+
+  /* ── CODE BLOCK ── */
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    overflow-x: auto;
+    margin: 12px 0;
+    line-height: 1.6;
+  }
+  .kw  { color: #93c5fd; }
+  .fn  { color: #4ade80; }
+  .str { color: #fbbf24; }
+  .cm  { color: #64748b; }
+
+  /* ── CONCEPT BOX ── */
+  .concept-box {
+    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .concept-box h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+
+  /* ── QUESTION BOX ── */
+  .qa-box {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .qa-q {
+    background: #1e293b;
+    color: white;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .qa-label {
+    background: var(--green);
+    padding: 1px 8px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .qa-a {
+    padding: 10px 16px;
+    font-size: 12.5px;
+    color: var(--text);
+    background: #f8fafc;
+  }
+
+  /* ── ARCH DIAGRAM ── */
+  .arch-box {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .arch-green  { color: #4ade80; }
+  .arch-blue   { color: #60a5fa; }
+  .arch-amber  { color: #fbbf24; }
+  .arch-purple { color: #a78bfa; }
+  .arch-muted  { color: #475569; }
+
+  /* ── PRINT ── */
+  @media print {
+    body { font-size: 12px; }
+    .cover { min-height: 100vh; }
+    .no-print { display: none; }
+    .page-card { page-break-inside: avoid; }
+  }
+
+  h3 { font-size: 15px; font-weight: 700; color: var(--dark); margin: 16px 0 8px; }
+  p  { margin-bottom: 8px; color: var(--muted); }
+  ul { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; font-size: 12.5px; color: var(--muted); }
+  strong { color: var(--text); font-weight: 600; }
+  .mt { margin-top: 16px; }
+  .page-break { page-break-before: always; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .tag { display: inline-block; padding:3px 10px; border-radius:9999px; font-size:11px;
+         font-weight:600; background:var(--bg); border:1px solid var(--border); color:var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  COVER PAGE                                                      -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">Frontend Engineering Technology — Project Documentation</div>
+  <h1>Career<span>Bridge</span></h1>
+  <p class="cover-sub">An Inclusive Professional Networking & Job Portal Platform</p>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="label">Student</div>
+      <div class="value">Akshar Modi</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Subject</div>
+      <div class="value">Frontend Engineering Technology</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Year</div>
+      <div class="value">2025–2026</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Type</div>
+      <div class="value">Full-Stack Web App</div>
+    </div>
+  </div>
+
+  <div class="cover-chips">
+    <span class="chip chip-green">React 19</span>
+    <span class="chip chip-blue">Vite</span>
+    <span class="chip chip-amber">Node.js</span>
+    <span class="chip chip-amber">Express.js</span>
+    <span class="chip chip-purple">Context API</span>
+    <span class="chip chip-green">Vanilla CSS</span>
+    <span class="chip chip-blue">REST API</span>
+    <span class="chip chip-purple">In-Memory DB</span>
+    <span class="chip chip-green">Lucide Icons</span>
+    <span class="chip chip-blue">Google Fonts</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 1 – PROJECT OVERVIEW                                   -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="content">
+
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Project Overview</h2>
+  </div>
+
+  <p><strong>CareerBridge</strong> is a LinkedIn-inspired full-stack professional networking platform designed for three user groups: <strong>Internship seekers</strong>, <strong>Full-time professionals</strong>, and <strong>Senior citizens (55+)</strong>. It also includes a separate <strong>Recruiter Portal</strong> where companies can post jobs and manage applications.</p>
+
+  <div class="concept-box">
+    <h4>💡 What makes this project unique?</h4>
+    <ul>
+      <li>Three distinct user <strong>modes</strong> in one app — Intern, Professional, Senior</li>
+      <li>Real <strong>frontend ↔ backend communication</strong> via REST API</li>
+      <li>Recruiter jobs posted from the backend appear <strong>live on the job seeker side</strong></li>
+      <li>Custom <strong>TradingView-inspired dark UI theme</strong> with CSS variables</li>
+      <li>No UI library (no Tailwind, no Bootstrap) — all CSS written from scratch</li>
+    </ul>
+  </div>
+
+  <div class="arch-box">
+    <div class="arch-green">┌─────────────────────────────────────────────────────────┐</div>
+    <div class="arch-green">│               CareerBridge Architecture                 │</div>
+    <div class="arch-green">└─────────────────────────────────────────────────────────┘</div>
+    <div>│</div>
+    <div class="arch-blue">├── Frontend: React 19 + Vite (port 5173)</div>
+    <div class="arch-blue">│   ├── Job Seeker App  (Feed, Jobs, Network, Messages, Profile)</div>
+    <div class="arch-blue">│   ├── Recruiter Portal (Dashboard, Post Job, Manage, Applicants)</div>
+    <div class="arch-blue">│   └── Role Select Screen (landing gate)</div>
+    <div>│</div>
+    <div class="arch-amber">├── Backend: Node.js + Express.js (port 5001)</div>
+    <div class="arch-amber">│   ├── GET/POST/PUT/DELETE /api/jobs</div>
+    <div class="arch-amber">│   └── GET/POST/PATCH     /api/applications</div>
+    <div>│</div>
+    <div class="arch-purple">└── Data Store: In-Memory JavaScript Arrays (db.js)</div>
+    <div class="arch-muted">    (no external database required — zero setup)</div>
+  </div>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 2 – TECH STACK                                         -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Technology Stack</h2>
+  </div>
+
+  <div class="page-card">
+    <div class="page-card-body">
+      <div class="tech-row">
+        <span class="tech-label">React 19</span>
+        <span class="tech-desc">Main UI framework. All pages are React functional components. Used hooks: useState, useEffect, useContext, useCallback.</span>
+        <span class="tech-badge badge-b">Frontend</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Vite</span>
+        <span class="tech-desc">Build tool and development server (replaces Create React App). Provides HMR (Hot Module Replacement) and fast build.</span>
+        <span class="tech-badge badge-b">Build Tool</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">React Context API</span>
+        <span class="tech-desc">Global state management (no Redux). Used to share: active tab, user mode (intern/pro/senior), notification count across all components.</span>
+        <span class="tech-badge badge-p">State Mgmt</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Vanilla CSS</span>
+        <span class="tech-desc">All styling written in custom CSS files. Uses CSS variables (custom properties), Flexbox, CSS Grid, animations (keyframes), media queries for responsiveness.</span>
+        <span class="tech-badge badge-g">Styling</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Node.js + Express.js</span>
+        <span class="tech-desc">Backend REST API server running on port 5001. Handles CRUD for jobs and applications. Uses ES Modules (import/export syntax).</span>
+        <span class="tech-badge badge-a">Backend</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">In-Memory Store (db.js)</span>
+        <span class="tech-desc">JavaScript arrays acting as a database. Pre-seeded with sample jobs and applications. No MongoDB or SQL needed.</span>
+        <span class="tech-badge badge-r">Data Layer</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Lucide React</span>
+        <span class="tech-desc">Open-source icon library. Used for all icons (Briefcase, Users, Bell, Search, etc.) as React SVG components.</span>
+        <span class="tech-badge badge-b">Icons</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Google Fonts – Inter</span>
+        <span class="tech-desc">Primary font: Inter (weights 300–900). Monospace font: JetBrains Mono for code/numbers. Loaded via @import in CSS.</span>
+        <span class="tech-badge badge-p">Typography</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">UUID (npm package)</span>
+        <span class="tech-desc">Generates unique IDs (v4 format) for each job posting and application in the backend.</span>
+        <span class="tech-badge badge-a">Utility</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">CORS (npm package)</span>
+        <span class="tech-desc">Cross-Origin Resource Sharing middleware. Allows the React frontend (port 5173) to make API calls to Express backend (port 5001).</span>
+        <span class="tech-badge badge-a">Security</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Vite Proxy</span>
+        <span class="tech-desc">Configured in vite.config.js to forward all /api/* requests from the frontend to http://localhost:5001 during development.</span>
+        <span class="tech-badge badge-b">Config</span>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 3 – FILE STRUCTURE                                     -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Project File Structure</h2>
+  </div>
+
+  <pre>
+<span class="cm">CareerBridge/                     ← Root project folder</span>
+├── index.html                    <span class="cm">← Entry HTML, browser title, SEO meta tags</span>
+├── vite.config.js                <span class="cm">← Vite config + API proxy setup</span>
+├── package.json                  <span class="cm">← npm scripts: dev, server, build</span>
+│
+├── <span class="arch-blue">server/                       ← Backend (Node.js)</span>
+│   ├── index.js                  <span class="cm">← Express server, CORS, route mounting</span>
+│   ├── db.js                     <span class="cm">← In-memory data store (jobs[], applications[])</span>
+│   └── routes/
+│       ├── jobs.js               <span class="cm">← GET, POST, PUT, DELETE /api/jobs</span>
+│       └── applications.js       <span class="cm">← GET, POST, PATCH /api/applications</span>
+│
+├── <span class="arch-green">public/</span>
+│   └── mango-avatar.png          <span class="cm">← User profile picture</span>
+│
+└── <span class="arch-green">src/                          ← Frontend (React)</span>
+    ├── main.jsx                  <span class="cm">← Root render, Role gate (Seeker / Recruiter)</span>
+    ├── App.jsx                   <span class="cm">← Job Seeker app shell</span>
+    ├── index.css                 <span class="cm">← Global CSS: tokens, buttons, cards, animations</span>
+    ├── RoleSelect.jsx / .css     <span class="cm">← Landing page — choose Seeker or Recruiter</span>
+    │
+    ├── context/
+    │   └── AppContext.jsx        <span class="cm">← React Context for global state</span>
+    │
+    ├── data/
+    │   └── mockData.js           <span class="cm">← Static data for feed posts, network suggestions</span>
+    │
+    ├── components/
+    │   ├── Navbar.jsx / .css     <span class="cm">← Top navigation bar</span>
+    │   └── TickerBar.jsx         <span class="cm">← (Available, currently removed)</span>
+    │
+    ├── pages/                    <span class="cm">← Job Seeker pages</span>
+    │   ├── FeedPage.jsx / .css   <span class="cm">← Home feed</span>
+    │   ├── JobsPage.jsx / .css   <span class="cm">← Job listings (fetches from API)</span>
+    │   ├── NetworkPage.jsx / .css<span class="cm">← People & communities</span>
+    │   ├── MessagesPage.jsx / .css<span class="cm">← Chat interface</span>
+    │   └── ProfilePage.jsx / .css<span class="cm">← User profile</span>
+    │
+    └── recruiter/                <span class="cm">← Recruiter Portal</span>
+        ├── RecruiterPortal.jsx / .css  <span class="cm">← Sidebar layout shell</span>
+        ├── recruiter.css               <span class="cm">← Shared recruiter styles</span>
+        └── pages/
+            ├── RecruiterDashboard.jsx  <span class="cm">← Stats + activity overview</span>
+            ├── PostJobPage.jsx         <span class="cm">← Job posting form</span>
+            ├── ManageJobsPage.jsx      <span class="cm">← Jobs table with actions</span>
+            └── ApplicantsPage.jsx      <span class="cm">← Review applications</span>
+  </pre>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 4 – PAGES IN DETAIL                                    -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>All Pages – Detailed Explanation</h2>
+  </div>
+
+
+  <!-- 4.1 ROLE SELECT -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(22,163,74,0.2)">🏠</div>
+      <div>
+        <h3>4.1 — Role Select Page (Landing Screen)</h3>
+        <p>File: src/RoleSelect.jsx + RoleSelect.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> The very first screen the user sees. They choose between <em>Job Seeker</em> or <em>Recruiter</em> mode. This acts as a gate — different roles see different UIs.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Two large clickable role cards with hover animation</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Animated grid background (CSS pseudo-elements)</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Gradient text for the headline (CSS clip-path technique)</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Arrow icon that slides right on hover (CSS transform)</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>Props:</strong> <code>onSelect</code> prop passed from main.jsx — clicking a card calls <code>onSelect('seeker')</code> or <code>onSelect('recruiter')</code></li>
+          <li><strong>Conditional Rendering:</strong> main.jsx shows this page only when role = null</li>
+          <li><strong>CSS Custom Properties:</strong> <code>--accent-green</code>, <code>--bg-card</code> etc. used throughout</li>
+          <li><strong>CSS Animations:</strong> <code>fadeInUp</code> keyframe with stagger delays (<code>delay-1</code>, <code>delay-2</code>)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.2 NAVBAR -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(37,99,235,0.2)">🔝</div>
+      <div>
+        <h3>4.2 — Navbar Component</h3>
+        <p>File: src/components/Navbar.jsx + Navbar.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Sticky top navigation bar present on all job-seeker pages. Contains logo, search, tab navigation, notifications, mode switcher, and avatar.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Mode switcher: Professional / Intern / Senior 55+</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Notification dropdown with 4 unread alerts</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Active tab underline indicator (CSS ::after)</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Sticky positioning with glassmorphism (backdrop-filter: blur)</div>
+        <div class="feature-item"><span class="dot dot-green"></span>Mobile hamburger menu (responsive)</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Switch to Recruiter Portal button</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>useState:</strong> Controls showNotif, showModeMenu, showMobile dropdowns</li>
+          <li><strong>useContext (useApp):</strong> Reads and sets activeTab, mode, notifications from global Context</li>
+          <li><strong>Props:</strong> Receives <code>onSwitchRole</code> callback from parent</li>
+          <li><strong>CSS Position: sticky:</strong> Navbar stays at top while scrolling</li>
+          <li><strong>Responsive Design:</strong> @media queries hide tabs on small screens, show hamburger</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.3 FEED PAGE -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(22,163,74,0.2)">📰</div>
+      <div>
+        <h3>4.3 — Feed Page (Home)</h3>
+        <p>File: src/pages/FeedPage.jsx + FeedPage.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Main homepage showing a LinkedIn-style post feed with 3-column layout: profile widget (left), posts (center), market pulse + trending (right).</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Create Post bar (shows submit button when typing)</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Like / Unlike toggle with live counter</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Save post with bookmark icon state toggle</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>"Read more" expand/collapse for long posts</div>
+        <div class="feature-item"><span class="dot dot-green"></span>Job Market Pulse — live stats panel (right sidebar)</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Profile stats widget — connections, views, impressions</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Trending hashtags panel</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>CSS Grid 3-column responsive layout</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>useState (multiple):</strong> liked/saved state per card, expanded text, draft post text</li>
+          <li><strong>Conditional Rendering:</strong> Submit button shown only when draft text exists; Read More only for long posts</li>
+          <li><strong>Array.map():</strong> Renders all posts dynamically from mockData array</li>
+          <li><strong>CSS Grid:</strong> <code>grid-template-columns: 260px 1fr 280px</code> for 3-column layout</li>
+          <li><strong>CSS Position: sticky:</strong> Sidebars stay visible while scrolling the feed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.4 JOBS PAGE -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(217,119,6,0.2)">💼</div>
+      <div>
+        <h3>4.4 — Jobs Page</h3>
+        <p>File: src/pages/JobsPage.jsx + JobsPage.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Job listings page that fetches live data from the Express backend API. Supports three categories (Internship / Professional / Senior) with filters and a real apply modal.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Live API fetch from /api/jobs?type=internship</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Category tabs: Internship / Professional / Senior 55+</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Filter pills: All / Remote / Hybrid / On-site / Hot 🔥</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Search bar filters by title, company, or skill tag</div>
+        <div class="feature-item"><span class="dot dot-green"></span>Shimmer skeleton loading animation while fetching</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Apply Modal — form with POST to /api/applications</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Bookmark / Save job toggle per card</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Success screen with CheckCircle icon after applying</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>useEffect + fetch:</strong> Loads jobs from API whenever category tab changes</li>
+          <li><strong>useCallback:</strong> Memoizes fetchJobs function to prevent unnecessary re-renders</li>
+          <li><strong>Controlled Inputs:</strong> Search input uses value + onChange to filter jobs in real time</li>
+          <li><strong>Async/Await + Error Handling:</strong> Try/catch in apply modal for API submission</li>
+          <li><strong>Array.filter():</strong> Applies multiple filters (type + location + search) on fetched data</li>
+          <li><strong>API Integration:</strong> POST request sends JSON body to backend, updates applicant count</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.5 NETWORK PAGE -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(124,58,237,0.2)">🤝</div>
+      <div>
+        <h3>4.5 — Network Page</h3>
+        <p>File: src/pages/NetworkPage.jsx + NetworkPage.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Networking page with suggested connections, a leaderboard, and community groups. Users can send connection requests and join communities.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Connection cards: Connect → Pending state machine</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Leaderboard with ranks, scores, and badges</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Community join/leave toggle per group</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Mutual connections count per person</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>useState (local component state):</strong> Each connection card tracks its own status (none/pending/connected)</li>
+          <li><strong>Object state (useState with object):</strong> All community join states stored as <code>{ [name]: true/false }</code></li>
+          <li><strong>State spreading:</strong> <code>prev => ({...prev, [name]: !prev[name]})</code> to update one key in object</li>
+          <li><strong>CSS Grid auto-fill:</strong> <code>repeat(auto-fill, minmax(180px, 1fr))</code> for responsive connection cards</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.6 MESSAGES PAGE -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(37,99,235,0.2)">💬</div>
+      <div>
+        <h3>4.6 — Messages Page</h3>
+        <p>File: src/pages/MessagesPage.jsx + MessagesPage.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Full chat interface with contact list on the left and conversation view on the right. Messages can be sent in real time (simulated in-memory).</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Contact list with online green dot indicator</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Unread message badge count per contact</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Active contact highlighted with green border</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Send message via Enter key or button</div>
+        <div class="feature-item"><span class="dot dot-green"></span>Right-aligned (sent) vs left-aligned (received) bubbles</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Search bar to filter contacts by name</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>useState for nested state:</strong> messages stored as <code>{ contactId: [messageArray] }</code></li>
+          <li><strong>State mutation (spreading):</strong> New message appended with <code>[...prev[selected], newMsg]</code></li>
+          <li><strong>Event handling:</strong> onKeyDown captures Enter key to send message</li>
+          <li><strong>Array.find():</strong> Gets current contact object from array by selected ID</li>
+          <li><strong>CSS Flexbox:</strong> 2-column layout with overflow-y: auto on message thread</li>
+          <li><strong>Dynamic CSS classes:</strong> message-row mine vs theirs for left/right alignment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.7 PROFILE PAGE -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(22,163,74,0.2)">👤</div>
+      <div>
+        <h3>4.7 — Profile Page</h3>
+        <p>File: src/pages/ProfilePage.jsx + ProfilePage.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Full LinkedIn-style profile with hero banner, animated stats, and tabbed sections for About, Experience, Education, Skills (with progress bars), and Certifications.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>SVG polyline chart in banner background</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Mango image as profile avatar</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Editable headline (Edit Profile / Save toggle)</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Stats: Profile Views, Post Impressions, Search Appearances</div>
+        <div class="feature-item"><span class="dot dot-green"></span>5 tab sections: About / Experience / Education / Skills / Certs</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Animated skill progress bars (CSS transition)</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Certification cards in responsive grid</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>useState (isEditing):</strong> Toggles between view mode and edit input mode for headline</li>
+          <li><strong>useState (activeSection):</strong> Controls which tab content is shown</li>
+          <li><strong>Conditional Rendering:</strong> <code>{activeSection === 'skills' &amp;&amp; (...)}</code> pattern for each tab</li>
+          <li><strong>Inline SVG:</strong> Hand-crafted polyline chart drawn with SVG points attribute</li>
+          <li><strong>CSS Transition on width:</strong> Skill bars animate from 0 to % on render</li>
+          <li><strong>Array.map() with index:</strong> Renders experience and education from arrays</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="page-break"></div>
+
+  <!-- 4.8 RECRUITER PORTAL -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(217,119,6,0.2)">🏢</div>
+      <div>
+        <h3>4.8 — Recruiter Portal Shell</h3>
+        <p>File: src/recruiter/RecruiterPortal.jsx + RecruiterPortal.css</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Separate admin-style layout for recruiters with a collapsible left sidebar and sticky top bar. Different from the job seeker app.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Collapsible sidebar (220px ↔ 60px with toggle button)</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Active nav item with green left border highlight</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Recruiter profile section at bottom of sidebar</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Top bar shows current page title + Live badge</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>useState (sidebarOpen):</strong> Boolean toggle controls CSS class on parent → child gets width change</li>
+          <li><strong>CSS Transition on width:</strong> Sidebar animates smoothly between 60px and 220px</li>
+          <li><strong>Dynamic Page Rendering:</strong> <code>pageMap[activeTab]</code> object lookup renders correct child component</li>
+          <li><strong>Props drilling:</strong> onNavigate / onViewApplicants passed to child pages to control navigation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.9 RECRUITER DASHBOARD -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(37,99,235,0.2)">📊</div>
+      <div>
+        <h3>4.9 — Recruiter Dashboard</h3>
+        <p>File: src/recruiter/pages/RecruiterDashboard.jsx</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Overview showing live stats fetched from the API: jobs posted, total applicants, shortlisted count, accepted count.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>4 stat cards fetched from /api/jobs and /api/applications</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Quick action cards — Post Job and Review Applicants shortcuts</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Recent Applications table with status color badges</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Posted jobs mini-list with applicant counts</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>Promise.all():</strong> Both API calls (jobs + applications) made simultaneously, resolved together</li>
+          <li><strong>useEffect + useState:</strong> Data fetched on mount, stored in state, triggers re-render</li>
+          <li><strong>Array.filter():</strong> Counts today's applications by comparing appliedAt timestamp with Date.now()</li>
+          <li><strong>Loading state UI:</strong> Shows "—" placeholders while data is loading</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.10 POST JOB -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(22,163,74,0.2)">📝</div>
+      <div>
+        <h3>4.10 — Post a Job Page</h3>
+        <p>File: src/recruiter/pages/PostJobPage.jsx</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Full job posting form for recruiters. Sends data to the backend via POST /api/jobs. The new job immediately appears in the Job Seeker's jobs page.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Job type selector (3 button choices)</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Dynamic form: Stipend/Duration for Intern vs Salary/Exp for others</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Tag builder: type + press Enter to add skill tags</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Brand color picker (6 color swatches)</div>
+        <div class="feature-item"><span class="dot dot-green"></span>Custom toggle switch CSS component for "Hot" flag</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Success animation screen after posting</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>Controlled Form Inputs:</strong> All fields wired to single form state object with generic <code>set(key, value)</code> helper</li>
+          <li><strong>Conditional Form Fields:</strong> Stipend/Duration shown for internship; Salary/Experience for other types</li>
+          <li><strong>Array in state:</strong> tags[] array with add (onKeyDown Enter) and remove (filter) operations</li>
+          <li><strong>Form validation:</strong> Checks required fields before making API call</li>
+          <li><strong>Async fetch POST:</strong> JSON body sent as POST, response parsed, error caught in try/catch</li>
+          <li><strong>onSuccess callback:</strong> After successful post, parent's navigation state is updated via props</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.11 MANAGE JOBS -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(124,58,237,0.2)">🗂</div>
+      <div>
+        <h3>4.11 — Manage Jobs Page</h3>
+        <p>File: src/recruiter/pages/ManageJobsPage.jsx</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Table view of all jobs posted by the recruiter. Allows filtering, pausing/activating a job, and deleting jobs. All actions call the backend API.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>HTML table with custom dark-themed styling</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Toggle job status Active ↔ Paused (PUT /api/jobs/:id)</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Delete job with confirmation dialog (DELETE /api/jobs/:id)</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Applicant count button → opens Applicants tab for that job</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>Optimistic UI update:</strong> State updated locally immediately after API call (no re-fetch needed)</li>
+          <li><strong>Array.map() / filter():</strong> Local delete removes job from state without API re-fetch</li>
+          <li><strong>Semantic HTML Table:</strong> <code>&lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tr&gt;, &lt;td&gt;</code></li>
+          <li><strong>window.confirm():</strong> Browser native confirmation before destructive delete action</li>
+          <li><strong>PUT request:</strong> Sends updated status field in JSON body to update job in backend</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.12 APPLICANTS PAGE -->
+  <div class="page-card">
+    <div class="page-card-header">
+      <div class="page-icon" style="background:rgba(220,38,38,0.2)">👥</div>
+      <div>
+        <h3>4.12 — Applicants Page</h3>
+        <p>File: src/recruiter/pages/ApplicantsPage.jsx</p>
+      </div>
+    </div>
+    <div class="page-card-body">
+      <p><strong>Purpose:</strong> Shows all job applications received. Recruiters can Accept, Shortlist, or Reject each applicant. Status is updated via API and reflects immediately.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><span class="dot dot-green"></span>Filter by Job (dropdown) and by Status (tab pills)</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Accept / Shortlist / Reject buttons (PATCH /api/applications/:id)</div>
+        <div class="feature-item"><span class="dot dot-purple"></span>Applicant cover note shown in styled quote box</div>
+        <div class="feature-item"><span class="dot dot-amber"></span>Color-coded status badges (green/blue/amber/red)</div>
+        <div class="feature-item"><span class="dot dot-green"></span>Email and portfolio links per applicant</div>
+        <div class="feature-item"><span class="dot dot-blue"></span>Count badges on each filter pill</div>
+      </div>
+      <div class="concept-box">
+        <h4>🧠 Frontend Concepts Used</h4>
+        <ul>
+          <li><strong>Promise.all():</strong> Fetches jobs and applications simultaneously on mount</li>
+          <li><strong>useEffect dependency on prop:</strong> Re-runs when selectedJobId prop changes from parent</li>
+          <li><strong>PATCH request:</strong> Sends <code>{ status: 'accepted' }</code> to update one field on the server</li>
+          <li><strong>Data enrichment:</strong> Application objects enriched with job title/company from joined array</li>
+          <li><strong>Multi-dimensional filtering:</strong> Two independent filters (jobId AND status) applied with chained .filter()</li>
+          <li><strong>&lt;select&gt; controlled input:</strong> Dropdown bound to filterJob state</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 5 – BACKEND API                                        -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+  <div class="section-header page-break">
+    <div class="section-num">5</div>
+    <h2>Backend REST API Reference</h2>
+  </div>
+
+  <p>The backend runs as a separate Node.js process on <strong>port 5001</strong>. Vite proxies all <code>/api/*</code> requests from the React frontend to this server automatically during development.</p>
+
+  <div class="page-card">
+    <div class="page-card-body">
+      <h3 style="color:var(--green); margin-bottom:12px">Jobs API — /api/jobs</h3>
+      <div class="tech-row">
+        <span class="tech-label" style="color:var(--green); font-family:monospace">GET /api/jobs</span>
+        <span class="tech-desc">Returns all jobs. Optional query params: <code>?type=internship</code>, <code>?recruiterId=r1</code></span>
+        <span class="tech-badge badge-g">READ</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label" style="color:var(--blue); font-family:monospace">POST /api/jobs</span>
+        <span class="tech-desc">Creates a new job. Body: { title, company, type, location, stipend/salary, tags, ... }</span>
+        <span class="tech-badge badge-b">CREATE</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label" style="color:var(--amber); font-family:monospace">PUT /api/jobs/:id</span>
+        <span class="tech-desc">Updates a job by ID (used to pause/activate or edit). Merges body fields into existing object.</span>
+        <span class="tech-badge badge-a">UPDATE</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label" style="color:var(--red); font-family:monospace">DELETE /api/jobs/:id</span>
+        <span class="tech-desc">Removes a job from the in-memory array by ID.</span>
+        <span class="tech-badge badge-r">DELETE</span>
+      </div>
+
+      <h3 style="color:var(--blue); margin: 20px 0 12px">Applications API — /api/applications</h3>
+      <div class="tech-row">
+        <span class="tech-label" style="color:var(--green); font-family:monospace">GET /api/applications</span>
+        <span class="tech-desc">Returns all applications. Filter by <code>?jobId=</code>, <code>?recruiterId=</code>, <code>?status=</code></span>
+        <span class="tech-badge badge-g">READ</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label" style="color:var(--blue); font-family:monospace">POST /api/applications</span>
+        <span class="tech-desc">Submit an application. Body: { jobId, name, email, portfolio, coverNote }. Also increments job.applicants counter.</span>
+        <span class="tech-badge badge-b">CREATE</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label" style="color:var(--amber); font-family:monospace">PATCH /api/applications/:id</span>
+        <span class="tech-desc">Updates only the <code>status</code> field: pending → shortlisted → accepted / rejected</span>
+        <span class="tech-badge badge-a">UPDATE</span>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 6 – KEY CSS CONCEPTS                                   -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2>Key CSS Concepts Used</h2>
+  </div>
+
+  <div class="page-card">
+    <div class="page-card-body">
+      <div class="tech-row">
+        <span class="tech-label">CSS Custom Properties</span>
+        <span class="tech-desc"><code>:root { --accent-green: #26a69a; }</code> — all colors, spacing, radii defined as variables. mode-senior class overrides them for senior mode.</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">CSS Grid</span>
+        <span class="tech-desc">Feed page 3-column layout, jobs card grid, applicant card grid — all using CSS Grid with responsive auto-fill.</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">CSS Flexbox</span>
+        <span class="tech-desc">Used in almost every component for row/column alignment (navbar, cards, buttons, chat layout).</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">@keyframes Animations</span>
+        <span class="tech-desc">fadeInUp (page transitions), shimmer (loading skeleton), pulse-dot (live indicator), float (hover effect), ticker-scroll (scrolling bar).</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">CSS Transitions</span>
+        <span class="tech-desc">Used on all interactive elements: buttons (translateY hover lift), sidebar width, skill bars, card borders, color changes.</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Backdrop Filter</span>
+        <span class="tech-desc"><code>backdrop-filter: blur(16px)</code> on Navbar creates the glassmorphism frosted glass effect.</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">CSS ::after Pseudo-element</span>
+        <span class="tech-desc">Active tab underline indicator drawn with <code>::after</code> pseudo-element (no extra HTML needed).</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Media Queries</span>
+        <span class="tech-desc">@media (max-width: 700px), @media (max-width: 900px) — responsive layouts switch from multi-column to single column.</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">CSS Gradient Text</span>
+        <span class="tech-desc"><code>background-clip: text; -webkit-text-fill-color: transparent</code> — Used on the landing page hero title for colored gradient text.</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-label">Position: sticky</span>
+        <span class="tech-desc">Navbar and sidebars use position:sticky so they stay visible during scroll without JavaScript.</span>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 7 – POSSIBLE PROFESSOR QUESTIONS                       -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+  <div class="section-header page-break">
+    <div class="section-num">7</div>
+    <h2>Likely Professor Questions & Model Answers</h2>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q1</span> What is React and why did you use it instead of plain HTML/JS?</div>
+    <div class="qa-a">React is a JavaScript UI library that uses a component-based architecture and a virtual DOM. I used it because: (1) it lets me break the UI into reusable components (Navbar, JobCard, etc.), (2) state changes automatically re-render only the affected part of the page — no manual DOM manipulation, and (3) hooks like useState and useEffect make data fetching and state management clean and predictable.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q2</span> What is the difference between useState and useEffect?</div>
+    <div class="qa-a"><strong>useState</strong> stores reactive data inside a component. When you call setState, the component re-renders. <strong>useEffect</strong> runs side effects (like API calls, subscriptions) after the component renders. Example: I use useState to store the fetched jobs array, and useEffect to call fetch('/api/jobs') when the component mounts or when the category tab changes.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q3</span> What is React Context API and why did you use it instead of Redux?</div>
+    <div class="qa-a">Context API is React's built-in global state solution. I created AppContext with useContext to share the active tab, user mode (intern/professional/senior), and notification count across all components without prop drilling. I chose Context over Redux because this project doesn't need complex state transforms — Context is simpler and requires zero extra libraries.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q4</span> What is a REST API and how does your frontend connect to the backend?</div>
+    <div class="qa-a">A REST API uses HTTP methods (GET, POST, PUT, PATCH, DELETE) and URLs to perform CRUD operations. My Express server exposes /api/jobs and /api/applications endpoints. The React frontend calls these using the browser's fetch() API. Vite is configured to proxy all /api/* requests to localhost:5001, so the frontend doesn't need to know the backend's port.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q5</span> What is CORS and why do you need it?</div>
+    <div class="qa-a">CORS (Cross-Origin Resource Sharing) is a browser security policy that blocks requests between different origins (domains or ports). Since React runs on port 5173 and Express on port 5001, the browser would normally block the API call. I installed the cors npm package in Express and configured it to allow requests from localhost:5173.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q6</span> Why didn't you use a database like MongoDB?</div>
+    <div class="qa-a">I used in-memory JavaScript arrays (db.js) as the data store. This was a deliberate choice for the project submission because it requires zero setup, works immediately on any machine, and demonstrates the API architecture clearly. The data resets on server restart, which is fine for a demo. To make it production-ready, I would replace the arrays with MongoDB + Mongoose, which would only require changing db.js without touching any routes.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q7</span> What is Vite and why is it better than Create React App?</div>
+    <div class="qa-a">Vite is a modern build tool that uses ES Modules directly in the browser during development, making the dev server start nearly instant (under 300ms vs 10-30s for CRA). It has native HMR (Hot Module Replacement) which updates only the changed module — not the whole page. It also has a smaller config, better performance, and is the current industry standard replacing CRA.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q8</span> Explain the role-based architecture of your app.</div>
+    <div class="qa-a">The app has two completely separate UIs — Job Seeker and Recruiter — managed by a role gate in main.jsx. When the app loads, it shows the RoleSelect landing page. If the user clicks "Recruiter", the RecruiterPortal component is rendered (with its own sidebar, dashboard, and pages). If they click "Job Seeker", the main AppProvider + App component renders (with the top navbar and 5-page navigation). Both share the same backend API, so data is synchronized between them.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q9</span> What CSS concepts are most important in your project?</div>
+    <div class="qa-a">The most important: (1) <strong>CSS Custom Properties</strong> for the design token system enabling the 3 user modes. (2) <strong>CSS Grid</strong> for the 3-column feed layout and card grids. (3) <strong>@keyframes</strong> for fadeInUp page transitions, skeleton loading shimmer, and the live pulse dot. (4) <strong>Flexbox</strong> for component-level alignment. (5) <strong>Backdrop-filter: blur</strong> for the glassmorphism navbar effect.</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q"><span class="qa-label">Q10</span> How do recruiter job postings appear on the job seeker side?</div>
+    <div class="qa-a">When a recruiter fills the Post Job form and clicks submit, the frontend makes a POST request to /api/jobs on the Express server. The server adds the new job to its in-memory jobs[] array and returns the created job. When a job seeker switches to the Jobs page or changes the category tab, a useEffect triggers a GET /api/jobs?type=internship call — which now includes the recruiter's newly posted job — and renders it as a card.</div>
+  </div>
+
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!--  SECTION 8 – HOW TO RUN                                         -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <h2>How to Run the Project</h2>
+  </div>
+
+  <div class="page-card">
+    <div class="page-card-body">
+      <h3>Step 1 — Open two terminal windows in the project folder</h3>
+      <pre>
+<span class="cm"># Terminal 1 — Start the Backend API Server</span>
+<span class="kw">npm</span> <span class="fn">run</span> <span class="str">server</span>
+<span class="cm"># → Server starts at http://localhost:5001</span>
+
+<span class="cm"># Terminal 2 — Start the Frontend Dev Server</span>
+<span class="kw">npm</span> <span class="fn">run</span> <span class="str">dev</span>
+<span class="cm"># → App opens at http://localhost:5173</span></pre>
+
+      <h3>Step 2 — Open http://localhost:5173 in the browser</h3>
+      <ul>
+        <li>The Role Select landing screen appears</li>
+        <li>Click <strong>Job Seeker</strong> to see the main platform (Feed, Jobs, Network, Messages, Profile)</li>
+        <li>Click <strong>Recruiter</strong> to see the recruiter portal (Dashboard, Post Job, Manage, Applicants)</li>
+      </ul>
+
+      <h3>Step 3 — Test the integration</h3>
+      <ul>
+        <li>Go to Recruiter → Post a Job → fill the form → click Post</li>
+        <li>Switch back to Job Seeker → click Jobs → see the new job appear in the list</li>
+        <li>Click Apply → fill form → Submit</li>
+        <li>Switch to Recruiter → Applicants tab → see the application with Accept/Reject buttons</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin: 48px 0 24px; color:var(--muted); font-size:12px;">
+    CareerBridge · Frontend Engineering Technology Project · Akshar Modi · 2025–2026<br/>
+    <strong style="color:var(--dark)">To save as PDF: Press Ctrl+P → Destination: Save as PDF → Save</strong>
+  </div>
+
+</div>
+</body>
+</html>

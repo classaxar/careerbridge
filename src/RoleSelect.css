@@ -1,0 +1,166 @@
+/* ─── ROLE SELECT ────────────────────────────────────────────── */
+.role-select-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+  background: var(--bg-primary);
+}
+
+/* animated background grid */
+.role-bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(38,166,154,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38,166,154,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+.role-bg-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(38,166,154,0.06) 0%, transparent 70%);
+}
+
+/* Logo */
+.role-logo {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+.role-logo-icon { color: var(--accent-green); }
+.role-logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.role-logo-text span { color: var(--accent-green); }
+
+/* Content */
+.role-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Hero text */
+.role-hero { text-align: center; }
+.role-title {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.role-title-accent {
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-green-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.role-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Cards */
+.role-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.role-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+  overflow: hidden;
+}
+.role-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.role-card.seeker::before {
+  background: linear-gradient(135deg, rgba(38,166,154,0.06) 0%, transparent 60%);
+}
+.role-card.recruiter::before {
+  background: linear-gradient(135deg, rgba(41,98,255,0.06) 0%, transparent 60%);
+}
+
+.role-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.role-card.seeker:hover { border-color: var(--accent-green); box-shadow: 0 12px 40px rgba(38,166,154,0.15); }
+.role-card.recruiter:hover { border-color: var(--accent-blue); box-shadow: 0 12px 40px rgba(41,98,255,0.15); }
+.role-card:hover::before { opacity: 1; }
+
+.role-card-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.seeker-icon { background: rgba(38,166,154,0.12); color: var(--accent-green); }
+.recruiter-icon { background: rgba(41,98,255,0.12); color: var(--accent-blue-light); }
+
+.role-card-body { flex: 1; }
+.role-card-body h2 { font-size: 20px; margin-bottom: 6px; }
+.role-card-body p { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+.role-card-modes { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.role-card-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 4px;
+  transition: transform var(--transition), color var(--transition);
+}
+.role-card:hover .role-card-arrow {
+  transform: translateX(4px);
+  color: var(--text-primary);
+}
+
+.role-footer {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .role-cards { grid-template-columns: 1fr; }
+  .role-card { flex-direction: column; }
+}

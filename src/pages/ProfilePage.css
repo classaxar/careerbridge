@@ -1,0 +1,153 @@
+/* ─── PROFILE PAGE ───────────────────────────────────────────── */
+.profile-page {
+  max-width: 860px;
+  margin: 24px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeInUp 0.4s ease;
+}
+
+/* Hero */
+.profile-hero { overflow: visible; }
+.profile-hero-banner {
+  height: 100px;
+  background: linear-gradient(135deg, #0a1830 0%, #132240 50%, #0f2030 100%);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.banner-chart {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-hero-body { padding: 0 24px 24px; }
+.profile-hero-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: -40px;
+  margin-bottom: 12px;
+}
+.profile-hero-avatar { display: flex; flex-direction: column; gap: 6px; }
+.profile-hero-avatar .avatar-placeholder {
+  border: 4px solid var(--bg-card);
+  box-shadow: var(--shadow-md);
+}
+.profile-mode-badge { align-self: flex-start; }
+
+.profile-hero-actions { display: flex; gap: 8px; align-items: center; }
+
+.profile-name { font-size: 22px; margin-bottom: 4px; }
+.profile-headline { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+.profile-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Stats row */
+.profile-stats-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.profile-stat-card {
+  flex: 1;
+  min-width: 140px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.profile-stat-val { font-size: 22px; font-weight: 800; font-family: var(--font-mono); }
+
+/* Section tabs */
+.profile-section-tabs { overflow: hidden; }
+.psec-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.psec-tabs::-webkit-scrollbar { display: none; }
+.psec-tab {
+  padding: 14px 20px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+.psec-tab:hover { color: var(--text-primary); }
+.psec-tab.active {
+  color: var(--accent-green);
+  border-bottom-color: var(--accent-green);
+}
+
+/* Content */
+.profile-content { animation: fadeInUp 0.3s ease; }
+.section-h2 { font-size: 16px; margin-bottom: 16px; }
+
+/* Experience */
+.exp-row {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+/* Skills */
+.skills-grid { display: flex; flex-direction: column; gap: 16px; }
+.skill-row {}
+.skill-track {
+  height: 6px;
+  background: var(--bg-hover);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-green-light));
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Certs */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.cert-card {
+  transition: transform var(--transition);
+}
+.cert-card:hover { transform: translateY(-3px); }
+
+@media (max-width: 700px) {
+  .profile-page { padding: 0 12px; }
+  .profile-stats-row { flex-direction: column; }
+  .profile-stat-card { min-width: auto; }
+  .profile-hero-actions { flex-direction: column; align-items: flex-end; }
+}
