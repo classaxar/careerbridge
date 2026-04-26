@@ -48,9 +48,9 @@ CareerBridge/
 │       └── applications.js  ← CRUD for applications
 │
 └── src/                     ← React Frontend (port 5173)
-    ├── main.jsx             ← Root + Role Gate
+    ├── main.jsx             ← Root + Entry Logic
     ├── App.jsx              ← Job Seeker Shell
-    ├── RoleSelect.jsx       ← Landing Screen
+    ├── RoleSelect.jsx       ← (Bypassed) Landing Screen
     ├── context/             ← Global State (AppContext)
     ├── pages/               ← Feed, Jobs, Network, Messages, Profile
     └── recruiter/           ← Recruiter Portal Pages
@@ -58,7 +58,15 @@ CareerBridge/
 
 ---
 
-## 🚀 How to Run
+## 🚀 Deployment (Vercel)
+
+This project is deployed using **Vercel Serverless Functions**. The `vercel.json` file automatically configures the Node.js Express backend to run alongside the Vite frontend.
+
+- **Frontend & Backend live at:** `https://careerbridge-eosin.vercel.app`
+
+---
+
+## 💻 How to Run Locally
 
 ### Prerequisites
 - Node.js 18+ installed
@@ -139,7 +147,8 @@ PATCH  /api/applications/:id      → Update application status
 - ✅ CSS Custom Properties (design token system)
 - ✅ CSS Keyframe Animations & Transitions
 - ✅ Glassmorphism UI (backdrop-filter: blur)
-- ✅ Role-based routing (Job Seeker vs Recruiter)
+- ✅ **Frictionless Onboarding** — Direct entry to Job Seeker feed
+- ✅ **Vercel Serverless Deployment** (`vercel.json` config for Express)
 - ✅ CORS configuration between frontend and backend
 
 ---
