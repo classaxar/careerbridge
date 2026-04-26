@@ -7,7 +7,7 @@ const app = express();
 const PORT = 5001;
 
 // ── Middleware ──────────────────────────────────────────────────
-app.use(cors({ origin: ['http://localhost:5173', 'http://127.0.0.1:5173'] }));
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // ── Request Logger ──────────────────────────────────────────────
@@ -22,7 +22,7 @@ app.use('/api/applications', applicationsRouter);
 
 // ── Health Check ────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
-  res.json({ success: true, message: 'NexusNet API is running 🚀', time: new Date().toISOString() });
+  res.json({ success: true, message: 'CareerBridge API is running 🚀', time: new Date().toISOString() });
 });
 
 // ── 404 ─────────────────────────────────────────────────────────
@@ -31,9 +31,15 @@ app.use((_req, res) => {
 });
 
 // ── Start ────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n🚀 NexusNet API running at http://localhost:${PORT}`);
-  console.log(`   Health: http://localhost:${PORT}/api/health`);
-  console.log(`   Jobs:   http://localhost:${PORT}/api/jobs`);
-  console.log(`   Apps:   http://localhost:${PORT}/api/applications\n`);
-});
+// Only listen if run directly (not via Vercel)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`\n🚀 CareerBridge API running at http://localhost:${PORT}`);
+    console.log(`   Health: http://localhost:${PORT}/api/health`);
+    console.log(`   Jobs:   http://localhost:${PORT}/api/jobs`);
+    console.log(`   Apps:   http://localhost:${PORT}/api/applications\n`);
+  });
+}
+
+// Export for Vercel Serverless
+export default app;
