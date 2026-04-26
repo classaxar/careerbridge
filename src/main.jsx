@@ -10,7 +10,7 @@ import RecruiterPortal from './recruiter/RecruiterPortal.jsx';
 import { AppProvider } from './context/AppContext.jsx';
 
 function Root() {
-  const [role, setRole] = useState(null); // null | 'seeker' | 'recruiter'
+  const [role, setRole] = useState('seeker');
 
   if (!role) return <RoleSelect onSelect={setRole} />;
 
