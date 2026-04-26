@@ -2,6 +2,8 @@
 
 > An inclusive professional networking & job portal platform — built for Interns, Professionals, and Senior Citizens (55+).
 
+🚀 **Live Demo:** [https://careerbridge-eosin.vercel.app](https://careerbridge-eosin.vercel.app)
+
 ![CareerBridge](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)
 ![Vite](https://img.shields.io/badge/Vite-8-646cff?style=for-the-badge&logo=vite)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
