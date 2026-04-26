@@ -66,7 +66,7 @@ CareerBridge/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/careerbridge.git
+git clone https://github.com/classaxar/careerbridge.git
 cd careerbridge
 
 # 2. Install dependencies
