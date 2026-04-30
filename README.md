@@ -4,21 +4,21 @@
 
 🚀 **Live Demo:** [https://careerbridge-eosin.vercel.app](https://careerbridge-eosin.vercel.app)
 
-![CareerBridge](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)
+![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)
 ![Vite](https://img.shields.io/badge/Vite-8-646cff?style=for-the-badge&logo=vite)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
-![CSS](https://img.shields.io/badge/Vanilla-CSS-1572b6?style=for-the-badge&logo=css3)
+![Monorepo](https://img.shields.io/badge/NPM-Workspaces-cb3837?style=for-the-badge&logo=npm)
 
 ---
 
 ## 📌 About
 
-CareerBridge is a full-stack LinkedIn-style platform built as a **Frontend Engineering Technology** project. It features:
+CareerBridge is a full-stack LinkedIn-style platform built as a **Frontend Engineering Technology** project. It has been refactored into a scalable Monorepo architecture. It features:
 
 - **3 User Modes** — Internship, Professional, Senior 55+
-- **Job Seeker Side** — Browse & apply for jobs posted by recruiters
-- **Recruiter Portal** — Post jobs, manage listings, review applicants
-- **Real API Integration** — Frontend ↔ Express backend with live data sync
+- **Job Seeker App** — Browse & apply for jobs, network, and engage with the feed.
+- **Employer/Recruiter Portal** — An isolated B2B dashboard to post jobs, manage listings, and review applicants.
+- **API Integration** — Frontend ↔ Express backend with live data sync.
 
 ---
 
@@ -26,43 +26,32 @@ CareerBridge is a full-stack LinkedIn-style platform built as a **Frontend Engin
 
 | Layer | Technology |
 |---|---|
+| Architecture | NPM Workspaces (Monorepo) |
 | Frontend | React 19 + Vite |
 | State Management | React Context API |
-| Styling | Vanilla CSS (CSS Grid, Flexbox, Animations) |
+| Styling | Vanilla CSS (Glassmorphism, CSS Grid, Flexbox) |
 | Icons | Lucide React |
 | Backend | Node.js + Express.js |
-| Data Store | In-Memory JavaScript Arrays |
-| Build Tool | Vite (with API Proxy) |
+| Data Store | In-Memory Data (MongoDB migration planned) |
 
 ---
 
 ## 📁 Project Structure
 
+This project uses **NPM Workspaces** to manage three distinct applications within a single repository:
+
 ```
 CareerBridge/
-├── server/                  ← Express.js Backend (port 5001)
-│   ├── index.js             ← Server entry point
-│   ├── db.js                ← In-memory data store
-│   └── routes/
-│       ├── jobs.js          ← CRUD for job postings
-│       └── applications.js  ← CRUD for applications
-│
-└── src/                     ← React Frontend (port 5173)
-    ├── main.jsx             ← Root + Entry Logic
-    ├── App.jsx              ← Job Seeker Shell
-    ├── RoleSelect.jsx       ← (Bypassed) Landing Screen
-    ├── context/             ← Global State (AppContext)
-    ├── pages/               ← Feed, Jobs, Network, Messages, Profile
-    └── recruiter/           ← Recruiter Portal Pages
+├── package.json             ← Root config (concurrently script)
+├── apps/
+│   ├── api/                 ← Node.js/Express Backend (Port 5001)
+│   ├── seeker/              ← Job Seeker React Frontend (Port 5173)
+│   └── recruiter/           ← Employer/Recruiter React Frontend (Port 5174)
 ```
 
----
-
-## 🚀 Deployment (Vercel)
-
-This project is deployed using **Vercel Serverless Functions**. The `vercel.json` file automatically configures the Node.js Express backend to run alongside the Vite frontend.
-
-- **Frontend & Backend live at:** `https://careerbridge-eosin.vercel.app`
+**Key Architectural Decisions:**
+- **Strict Isolation:** The Seeker and Recruiter experiences are completely decoupled into their own Vite applications, sharing no frontend code.
+- **Unified Workflow:** `concurrently` is used at the root to boot all three servers simultaneously.
 
 ---
 
@@ -79,46 +68,34 @@ This project is deployed using **Vercel Serverless Functions**. The `vercel.json
 git clone https://github.com/classaxar/careerbridge.git
 cd careerbridge
 
-# 2. Install dependencies
+# 2. Install dependencies across the entire monorepo
 npm install
 
-# 3. Start the backend server (Terminal 1)
-npm run server
-# → API running at http://localhost:5001
-
-# 4. Start the frontend dev server (Terminal 2)
+# 3. Start the entire stack (API, Seeker App, Recruiter App)
 npm run dev
-# → App running at http://localhost:5173
 ```
 
-### Available Scripts
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Start React frontend (Vite) |
-| `npm run server` | Start Express backend |
-| `npm run build` | Build production bundle |
+### Access Points
+- **API Health:** `http://localhost:5001/api/health`
+- **Job Seeker App:** `http://localhost:5173` (Starts at Startup Landing Page)
+- **Employer Portal:** `http://localhost:5174` (Starts at B2B Auth Wall)
 
 ---
 
-## 📄 Pages
+## 📄 Core Features
 
-### Job Seeker Side
-| Page | Description |
-|---|---|
-| **Feed** | Home feed with posts, like/save, trending panel |
-| **Jobs** | Live job listings fetched from API, apply modal |
-| **Network** | Connection suggestions, leaderboard, communities |
-| **Messages** | Real-time chat simulation |
-| **Profile** | Full profile with skills, experience, certifications |
+### Job Seeker Side (Port 5173)
+- **Guest Mode:** Browse jobs freely without logging in. Authentication is intercepted only upon attempting to apply or save.
+- **Premium Auth UI:** Split-pane glassmorphism design with Google/Apple SSO buttons.
+- **Feed:** Home feed with posts, like/save, trending panel.
+- **Network:** Connection suggestions, leaderboard, and dynamic communities.
+- **Mobile Responsiveness:** Advanced native-app style bottom navigation bar on mobile.
 
-### Recruiter Portal
-| Page | Description |
-|---|---|
-| **Dashboard** | Stats overview (jobs posted, applicants, shortlisted) |
-| **Post a Job** | Full form to create job listings via API |
-| **Manage Jobs** | Table view with pause/activate/delete actions |
-| **Applicants** | Review and update application status |
+### Recruiter Portal (Port 5174)
+- **B2B Auth Wall:** Secure, isolated login for employers.
+- **Dashboard:** Stats overview (jobs posted, applicants, shortlisted).
+- **Manage Jobs:** Table view with pause/activate/delete actions.
+- **Applicants Pipeline:** Review and update application status.
 
 ---
 
@@ -134,28 +111,6 @@ GET    /api/applications          → List applications (filter by jobId, status
 POST   /api/applications          → Submit job application
 PATCH  /api/applications/:id      → Update application status
 ```
-
----
-
-## ✨ Features Demonstrated
-
-- ✅ React Hooks — `useState`, `useEffect`, `useContext`, `useCallback`
-- ✅ React Context API for global state management
-- ✅ REST API integration with `fetch` (GET, POST, PUT, PATCH, DELETE)
-- ✅ Async/await with error handling
-- ✅ CSS Grid & Flexbox responsive layouts
-- ✅ CSS Custom Properties (design token system)
-- ✅ CSS Keyframe Animations & Transitions
-- ✅ Glassmorphism UI (backdrop-filter: blur)
-- ✅ **Frictionless Onboarding** — Direct entry to Job Seeker feed
-- ✅ **Vercel Serverless Deployment** (`vercel.json` config for Express)
-- ✅ CORS configuration between frontend and backend
-
----
-
-## 📸 Screenshots
-
-> Role Select → Job Seeker Feed → Jobs Page → Recruiter Dashboard → Applicants
 
 ---
 
