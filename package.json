@@ -11,7 +11,10 @@
     "dev:seeker": "npm run dev -w seeker",
     "dev:recruiter": "npm run dev -w recruiter",
     "dev:api": "npm run dev -w api",
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:seeker\" \"npm run dev:recruiter\""
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:seeker\" \"npm run dev:recruiter\"",
+    "build:seeker": "npm run build -w seeker",
+    "build:recruiter": "npm run build -w recruiter",
+    "vercel-build": "npm run build:seeker && npm run build:recruiter && rm -rf dist && mkdir -p dist/recruiter && cp -r apps/seeker/dist/* dist/ && cp -r apps/recruiter/dist/* dist/recruiter/"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

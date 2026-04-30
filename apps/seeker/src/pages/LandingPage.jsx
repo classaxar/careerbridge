@@ -19,7 +19,7 @@ export default function LandingPage() {
           <span className="logo-text">Career<span style={{ color: '#26a69a' }}>Bridge</span></span>
         </div>
         <div style={{ display: 'flex', gap: '15px' }}>
-          <a href="http://localhost:5174" className="btn-login" style={{ textDecoration: 'none' }}>Recruiter Login</a>
+          <a href="/recruiter/" className="btn-login" style={{ textDecoration: 'none' }}>Recruiter Login</a>
         </div>
       </nav>
 
