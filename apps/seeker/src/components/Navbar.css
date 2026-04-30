@@ -250,31 +250,42 @@
   .navbar-search { max-width: 200px; }
 }
 @media (max-width: 640px) {
-  .mobile-menu-btn { display: flex; align-items:center; }
+  .mobile-menu-btn { display: none; }
   .mobile-nav {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     position: fixed;
-    top: 58px;
+    bottom: 0;
+    top: auto;
     left: 0;
     right: 0;
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border);
-    z-index: 99;
-    animation: fadeInUp 0.2s ease;
+    background: rgba(19,23,34,0.98);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom, 15px);
+    z-index: 1000;
   }
   .mobile-nav-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 14px 20px;
+    gap: 4px;
+    padding: 10px 0;
     background: none;
     border: none;
-    border-bottom: 1px solid var(--border);
     color: var(--text-secondary);
     font-family: var(--font-main);
-    font-size: 14px;
+    font-size: 10px;
+    font-weight: 500;
+    flex: 1;
     cursor: pointer;
+    transition: color 0.2s ease;
   }
   .mobile-nav-item.active { color: var(--accent-green); }
+  
+  /* Add padding to the whole body so the bottom bar doesn't overlap content */
+  body {
+    padding-bottom: 70px;
+  }
 }

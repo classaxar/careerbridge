@@ -6,9 +6,15 @@ export function AppProvider({ children }) {
   const [mode, setMode] = useState('normal'); // 'normal' | 'internship' | 'senior'
   const [activeTab, setActiveTab] = useState('feed');
   const [notifications, setNotifications] = useState(4);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <AppContext.Provider value={{ mode, setMode, activeTab, setActiveTab, notifications, setNotifications }}>
+    <AppContext.Provider value={{ 
+      mode, setMode, 
+      activeTab, setActiveTab, 
+      notifications, setNotifications,
+      isAuthenticated, setIsAuthenticated
+    }}>
       {children}
     </AppContext.Provider>
   );

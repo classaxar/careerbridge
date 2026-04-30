@@ -113,12 +113,7 @@ export default function Navbar({ onSwitchRole }) {
           )}
         </div>
 
-        {/* Switch Role */}
-        {onSwitchRole && (
-          <button className="btn btn-ghost btn-sm" onClick={onSwitchRole} title="Switch to Recruiter">
-            <Briefcase size={13}/> Recruiter Portal
-          </button>
-        )}
+        {/* Switch Role Removed */}
 
         {/* Avatar */}
         <img
@@ -129,27 +124,22 @@ export default function Navbar({ onSwitchRole }) {
           onClick={() => setActiveTab('profile')}
         />
 
-        {/* Mobile menu */}
-        <button className="mobile-menu-btn" onClick={() => setShowMobile(v => !v)}>
-          <Menu size={20} />
-        </button>
+        {/* Mobile menu button removed */}
       </div>
 
-      {/* ── MOBILE NAV ── */}
-      {showMobile && (
-        <div className="mobile-nav">
-          {tabs.map(t => (
-            <button
-              key={t.id}
-              className={`mobile-nav-item ${activeTab === t.id ? 'active' : ''}`}
-              onClick={() => { setActiveTab(t.id); setShowMobile(false); }}
-            >
-              <t.icon size={18} />
-              <span>{t.label}</span>
-            </button>
-          ))}
-        </div>
-      )}
+      {/* ── MOBILE NAV (Bottom Bar) ── */}
+      <div className="mobile-nav">
+        {tabs.map(t => (
+          <button
+            key={t.id}
+            className={`mobile-nav-item ${activeTab === t.id ? 'active' : ''}`}
+            onClick={() => setActiveTab(t.id)}
+          >
+            <t.icon size={20} />
+            <span>{t.label}</span>
+          </button>
+        ))}
+      </div>
     </nav>
   );
 }

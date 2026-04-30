@@ -38,6 +38,7 @@ const filters = ['All', 'Remote', 'Hybrid', 'On-site', 'Hot 🔥'];
 
 // ─── Job Card ────────────────────────────────────────────────────
 function JobCard({ job, cat, onApply }) {
+  const { isAuthenticated, setActiveTab, setRedirectAfterAuth } = useApp();
   const [saved, setSaved] = useState(false);
   const cfg = categoryConfig[cat] || categoryConfig.normal;
 
@@ -51,6 +52,15 @@ function JobCard({ job, cat, onApply }) {
     if (hrs < 24) return `${hrs}h ago`;
     return `${Math.floor(hrs / 24)}d ago`;
   })();
+
+  const requireAuth = (actionCallback) => {
+    if (!isAuthenticated) {
+      setRedirectAfterAuth('jobs');
+      setActiveTab('auth');
+    } else if (actionCallback) {
+      actionCallback();
+    }
+  };
 
   return (
     <div className="job-card card fade-in-up">
@@ -79,7 +89,7 @@ function JobCard({ job, cat, onApply }) {
 
           <button
             className={`save-job-btn ${saved ? 'saved' : ''}`}
-            onClick={() => setSaved(v => !v)}
+            onClick={() => requireAuth(() => setSaved(v => !v))}
           >
             <Bookmark size={16} fill={saved ? 'var(--accent-amber)' : 'none'} />
           </button>
@@ -115,10 +125,12 @@ function JobCard({ job, cat, onApply }) {
 
         {/* Actions */}
         <div className="job-actions">
-          <button className="btn btn-primary btn-sm" onClick={() => onApply(job)}>
+          <button className="btn btn-primary btn-sm" onClick={() => requireAuth(() => onApply(job))}>
             <Send size={13} /> Apply Now
           </button>
-          <button className="btn btn-ghost btn-sm">Learn More</button>
+          <button className="btn btn-ghost btn-sm" onClick={() => requireAuth()}>
+            Learn More
+          </button>
         </div>
       </div>
     </div>

@@ -8,6 +8,9 @@ import ManageJobsPage from './pages/ManageJobsPage';
 import ApplicantsPage from './pages/ApplicantsPage';
 import './RecruiterPortal.css';
 
+import RecruiterAuth from './RecruiterAuth';
+import { useApp } from '../context/AppContext';
+
 const navItems = [
   { id: 'dashboard',  label: 'Dashboard',    icon: LayoutDashboard },
   { id: 'post-job',   label: 'Post a Job',   icon: PlusCircle },
@@ -17,10 +20,15 @@ const navItems = [
 
 const RECRUITER = { name: 'Rohan Kapoor', company: 'TechHire Solutions', initials: 'RK' };
 
-export default function RecruiterPortal({ onSwitchRole }) {
+export default function RecruiterPortal() {
+  const { isAuthenticated } = useApp();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedJobId, setSelectedJobId] = useState(null);
+
+  if (!isAuthenticated) {
+    return <RecruiterAuth />;
+  }
 
   const viewApplicants = (jobId) => {
     setSelectedJobId(jobId);
@@ -69,15 +77,7 @@ export default function RecruiterPortal({ onSwitchRole }) {
               </div>
             )}
           </div>
-          <button
-            className="sidebar-nav-item"
-            onClick={onSwitchRole}
-            title="Switch to Job Seeker"
-            style={{ marginTop: '8px' }}
-          >
-            <LogOut size={17} />
-            {sidebarOpen && <span>Switch Mode</span>}
-          </button>
+          {/* Switch Mode Removed */}
         </div>
 
         {/* Toggle button */}

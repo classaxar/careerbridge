@@ -25,6 +25,11 @@ app.get('/api/health', (_req, res) => {
   res.json({ success: true, message: 'CareerBridge API is running 🚀', time: new Date().toISOString() });
 });
 
+// ── Root Route ──────────────────────────────────────────────────
+app.get('/', (_req, res) => {
+  res.send('Welcome to the CareerBridge API! Navigate to /api/health to check status.');
+});
+
 // ── 404 ─────────────────────────────────────────────────────────
 app.use((_req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });
