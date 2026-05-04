@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Layers, LayoutDashboard, PlusCircle, Briefcase, Users,
   TrendingUp, LogOut, Menu, X, BarChart2,
 } from 'lucide-react';
+import { useAuth, UserButton } from '@clerk/clerk-react';
 import RecruiterDashboard from './pages/RecruiterDashboard';
 import PostJobPage from './pages/PostJobPage';
 import ManageJobsPage from './pages/ManageJobsPage';
@@ -21,10 +22,20 @@ const navItems = [
 const RECRUITER = { name: 'Rohan Kapoor', company: 'TechHire Solutions', initials: 'RK' };
 
 export default function RecruiterPortal() {
-  const { isAuthenticated } = useApp();
+  const { isAuthenticated, setIsAuthenticated } = useApp();
+  const { isSignedIn, isLoaded } = useAuth();
+  
   const [activeTab, setActiveTab] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedJobId, setSelectedJobId] = useState(null);
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn && !isAuthenticated) {
+      setIsAuthenticated(true);
+    } else if (isLoaded && !isSignedIn && isAuthenticated) {
+      setIsAuthenticated(false);
+    }
+  }, [isLoaded, isSignedIn, isAuthenticated, setIsAuthenticated]);
 
   if (!isAuthenticated) {
     return <RecruiterAuth />;
@@ -69,15 +80,14 @@ export default function RecruiterPortal() {
 
         <div className="sidebar-footer">
           <div className="recruiter-profile">
-            <div className="avatar-placeholder avatar-sm">{RECRUITER.initials}</div>
+            <UserButton />
             {sidebarOpen && (
-              <div>
-                <p className="fw-600 text-sm">{RECRUITER.name}</p>
-                <p className="text-xs text-muted">{RECRUITER.company}</p>
+              <div style={{ marginLeft: '10px' }}>
+                <p className="fw-600 text-sm">Employer Account</p>
+                <p className="text-xs text-muted">CareerBridge</p>
               </div>
             )}
           </div>
-          {/* Switch Mode Removed */}
         </div>
 
         {/* Toggle button */}

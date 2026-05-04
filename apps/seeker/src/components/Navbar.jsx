@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { currentUser, notifications as notifData } from '../data/mockData';
+import { UserButton } from '@clerk/clerk-react';
 import './Navbar.css';
 
 const tabs = [
@@ -115,14 +116,8 @@ export default function Navbar({ onSwitchRole }) {
 
         {/* Switch Role Removed */}
 
-        {/* Avatar */}
-        <img
-          src="/mango-avatar.png"
-          alt="Akshar Modi"
-          className="avatar avatar-sm"
-          style={{ cursor:'pointer', objectFit:'cover' }}
-          onClick={() => setActiveTab('profile')}
-        />
+        {/* Clerk User Avatar & Dropdown */}
+        <UserButton />
 
         {/* Mobile menu button removed */}
       </div>

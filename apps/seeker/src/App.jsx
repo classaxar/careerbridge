@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useApp } from './context/AppContext';
+import { useAuth } from '@clerk/clerk-react';
 import Navbar from './components/Navbar';
 import FeedPage from './pages/FeedPage';
 import JobsPage from './pages/JobsPage';
@@ -14,7 +16,19 @@ import './pages/MessagesPage.css';
 import './pages/ProfilePage.css';
 
 function AppShell() {
-  const { mode, activeTab } = useApp();
+  const { mode, activeTab, setActiveTab, isAuthenticated, setIsAuthenticated, redirectAfterAuth, setRedirectAfterAuth } = useApp();
+  const { isSignedIn, isLoaded } = useAuth();
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn && !isAuthenticated) {
+      setIsAuthenticated(true);
+      setActiveTab(redirectAfterAuth || 'feed');
+      setRedirectAfterAuth(null);
+    } else if (isLoaded && !isSignedIn && isAuthenticated) {
+      setIsAuthenticated(false);
+      setActiveTab('landing');
+    }
+  }, [isLoaded, isSignedIn, isAuthenticated, setActiveTab, setIsAuthenticated, redirectAfterAuth, setRedirectAfterAuth]);
 
   if (activeTab === 'landing') {
     return <LandingPage />;
