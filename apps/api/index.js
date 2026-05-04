@@ -1,10 +1,19 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import jobsRouter from './routes/jobs.js';
 import applicationsRouter from './routes/applications.js';
+import connectDB from './config/db.js';
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
+
+// Connect to MongoDB (skip if no URI is provided yet, fallback to mock)
+if (process.env.MONGO_URI) {
+  connectDB();
+} else {
+  console.log('⚠️ MONGO_URI not found in .env. Using mock in-memory arrays.');
+}
 
 // ── Middleware ──────────────────────────────────────────────────
 app.use(cors({ origin: '*' }));
