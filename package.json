@@ -1,26 +1,20 @@
 {
-  "name": "careerbridge-monorepo",
+  "name": "careerbridge-unified",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev:seeker": "npm run dev -w seeker",
-    "dev:recruiter": "npm run dev -w recruiter",
+    "dev:web": "npm run dev -w web",
     "dev:api": "npm run dev -w api",
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:seeker\" \"npm run dev:recruiter\"",
-    "build:seeker": "npm run build -w seeker",
-    "build:recruiter": "npm run build -w recruiter",
-    "vercel-build": "npm run build:seeker && npm run build:recruiter && rm -rf dist && mkdir -p dist/recruiter && cp -r apps/seeker/dist/* dist/ && cp -r apps/recruiter/dist/* dist/recruiter/"
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "build:web": "npm run build -w web",
+    "build:api": "npm run build -w api"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1",
-    "gh-pages": "^6.3.0"
-  },
-  "dependencies": {
-    "mongodb": "^7.2.0"
+    "concurrently": "^9.0.0"
   }
 }

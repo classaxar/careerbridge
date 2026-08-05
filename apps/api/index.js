@@ -1,22 +1,32 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import jobsRouter from './routes/jobs.js';
-import applicationsRouter from './routes/applications.js';
-import connectDB from './config/db.js';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Connect to MongoDB (skip if no URI is provided yet, fallback to mock)
-if (process.env.MONGO_URI) {
-  connectDB();
-} else {
-  console.log('⚠️ MONGO_URI not found in .env. Using mock in-memory arrays.');
-}
+// ── Security Middleware ──────────────────────────────────────────
+// Helmet sets secure HTTP headers
+app.use(helmet());
 
-// ── Middleware ──────────────────────────────────────────────────
-app.use(cors({ origin: '*' }));
+// Rate limiting (100 requests per 15 minutes per IP)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use('/api', limiter); // apply to all API routes
+
+// CORS configuration (strict)
+// Update this later when frontend domain is ready
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // ── Request Logger ──────────────────────────────────────────────
@@ -26,17 +36,12 @@ app.use((req, _res, next) => {
 });
 
 // ── Routes ──────────────────────────────────────────────────────
-app.use('/api/jobs', jobsRouter);
-app.use('/api/applications', applicationsRouter);
-
-// ── Health Check ────────────────────────────────────────────────
-app.get('/api/health', (_req, res) => {
-  res.json({ success: true, message: 'CareerBridge API is running 🚀', time: new Date().toISOString() });
-});
-
-// ── Root Route ──────────────────────────────────────────────────
-app.get('/', (_req, res) => {
-  res.send('Welcome to the CareerBridge API! Navigate to /api/health to check status.');
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'secure_and_running',
+    timestamp: new Date().toISOString(),
+    message: 'CareerBridge API v2 is online.'
+  });
 });
 
 // ── 404 ─────────────────────────────────────────────────────────
@@ -45,15 +50,7 @@ app.use((_req, res) => {
 });
 
 // ── Start ────────────────────────────────────────────────────────
-// Only listen if run directly (not via Vercel)
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`\n🚀 CareerBridge API running at http://localhost:${PORT}`);
-    console.log(`   Health: http://localhost:${PORT}/api/health`);
-    console.log(`   Jobs:   http://localhost:${PORT}/api/jobs`);
-    console.log(`   Apps:   http://localhost:${PORT}/api/applications\n`);
-  });
-}
-
-// Export for Vercel Serverless
-export default app;
+app.listen(PORT, () => {
+  console.log(`\n🚀 Secure CareerBridge API running at http://localhost:${PORT}`);
+  console.log(`   Health: http://localhost:${PORT}/api/health\n`);
+});
